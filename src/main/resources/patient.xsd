@@ -1,0 +1,95 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+	targetNamespace="http://spring.io/guides/gs-producing-web-service"
+	elementFormDefault="qualified">
+
+
+
+	<xs:element name="getPatientRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getPatientyResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="patientInfo" type="tns:Patient" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="getPaymentTypeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" />
+
+
+			</xs:sequence>
+		</xs:complexType>
+
+
+	</xs:element>
+	<xs:element name="getPaymentTypeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Payment" type="tns:Payments" />
+			</xs:sequence>
+		</xs:complexType>
+
+
+	</xs:element>
+
+	<xs:element name="patient" type="tns:Patient" />
+
+
+
+
+
+	<xs:complexType name="Patient">
+		<xs:sequence>
+			<xs:element name="name" type="tns:String15Chars" />
+			<xs:element name="age" type="xs:int" />
+			<xs:element name="dob" type="xs:string" />
+			<xs:element name="gender" type="xs:string" />
+			<xs:element name="phone" type="xs:int" maxOccurs="2" />
+			<xs:element name="Email" type="xs:string" />
+			<xs:element name="payment" type="tns:Payments"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="Payments">
+		<xs:choice>
+			<xs:element name="Insurence" type="tns:ALL" />
+			<xs:element name="Cash" type="xs:int" />
+		</xs:choice>
+
+	</xs:complexType>
+
+	<xs:complexType name="ALL">
+		<xs:choice>
+			<xs:element name="Provider" type="xs:int" />
+			<xs:element name="limit" type="xs:int" />
+		</xs:choice>
+	</xs:complexType>
+
+
+	<xs:simpleType name="String15Chars">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="GenderType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="F"></xs:enumeration>
+			<xs:enumeration value="M"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+</xs:schema>
